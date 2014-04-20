@@ -1,0 +1,18 @@
+def  -     (  n1 n2 ---  n1-n2  )  [ neg + ] .
+def swap  (  n1 n2 ---  n2 n1  )   [  posh1 posh2 pup1 pup2  ]   .
+def  dupover  (  n1 n2 n3 --- n1 n2  n3 n2   )   [  posh1 dup posh2 pup1 pup2  ]   .
+def duptwo   ( n1 n2 --- n1 n2 n1 n2  )   [   dupover dupover  ]  .
+def  !=   (   n1 n2 --- n1!=n2   )     [    =  not  ]    .
+def >    (  n1 n2 ---  n2>n1  )   [  duptwo   != posh1  <  not pup1 and  ]  .
+def >=    (  n1 n2 ---  n2>=n1  )   [   < not  ] .
+def <=    (  n1 n2 ---  n2<=n1  )   [   >   not  ] .
+def ++ [   1 +  ] .
+def -- [   1 -  ] .
+def log [ dup printnum  ]  .
+def logs [ printstr  ]  .
+def out [ printnum  ]  .
+def outs [ printstr  ]  .
+def printchar [ "\s" swap 1 setchar printstr delstr ] .
+def logch [ dup printchar  ] .
+def clone1 [ pup1 dup posh1  ] .
+def clone2 [ pup2 dup posh2  ] .

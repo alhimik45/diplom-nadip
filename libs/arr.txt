@@ -1,0 +1,126 @@
+def to ( n1 n2 -- [n1..n2] )
+[
+	def loop ( arr i to n  -- arr i to n++ )
+	[
+		duptwo < [ drop drop drop  ]
+			[
+				posh1 posh2 clone1
+				swap posh2 clone2 setelem 
+				pup2 ++ pup2 pup1 ++ loop tail
+			] if
+	] .
+	
+	posh1 posh2 makearr 0 pup1 pup2 loop
+
+] .
+
+def map ( arr lambda --- arr  )
+[
+	def loop ( arr lambda n size --- arr lambda n size )
+	[
+		duptwo < [ posh1 posh1 posh2 clone1 getelem clone2 call
+			   clone1 setelem pup2 pup1 ++ pup1 loop tail
+			 ]
+			 [ drop drop drop ] if
+	] .
+	posh1 size posh2 pup1 0 pup2 loop
+
+] .
+
+
+
+
+def filter ( arr lambda --- arr filteredarr )
+[
+	var res
+	var i
+	res makearr @
+	i 0 @
+	swap [ 
+		posh1 posh2 posh2 clone1 clone2 call
+		[ res ! clone1  i !  setelem drop i i ! ++ @ ]
+		[ ] if
+		pup2 pup2 pup1
+	     ] map
+	posh1 drop pup1 res !	
+] .
+
+
+def filter! ( arr lambda --- filteredarr )
+[
+	filter swap delarr
+] .
+
+
+def copyarr ( arr --- arr copyarr )
+[
+	[ drop 1 ] filter
+] .
+
+
+def foldl ( arr lambda start --- arr res )
+[
+	var res
+	var lam
+	res swap @ lam swap @
+	[  posh1 clone1 res ! swap lam ! call res swap @ pup1 ]  map
+	res ! 
+] .
+
+def logarr
+[
+	[ log ] map
+] .
+
+
+def sum ( arr --- arr sum )
+[
+ [ + ] 0 foldl
+] .
+
+def produce ( arr --- arr prod )
+[
+ [ * ] 1 foldl
+] .
+
+
+
+
+def union ( arr1 arr2 --- arr1 arr2 arr1+arr2 )
+[
+	var i
+	def loop ( arr1 arr2 n --- arr1 arr2 n )
+	[
+		posh1 size clone1 <= [ pup1 drop swap ]
+				[
+					clone1 getelem
+					swap posh2
+					clone1 i ! + setelem
+					pup2 pup1 ++ loop tail
+				] if
+	] .
+	posh1 copyarr   size i swap @ pup1 0 loop 
+] .
+
+def union! ( arr1 arr2 --- arr1+arr2 )
+[
+	union posh1 delarr delarr pup1
+] .
+
+def qsort ( arr --- arr sortedarr )
+[
+	size 1 <= [ copyarr  ]
+		[
+			0 getelem  swap 
+			[ dupover > ] filter posh1 
+			[ dupover = ] filter posh1 
+			[ dupover < ] filter posh1 
+			posh1 drop pup1
+			pup1   qsort posh1 delarr pup1
+			pup1 union!
+			pup1   qsort posh1 delarr pup1
+			union! 
+		] if
+] .
+
+

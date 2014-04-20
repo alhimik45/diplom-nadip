@@ -1,0 +1,11 @@
+def pi [ 3,14159265359 ] .
+def pi/2 [ pi 2 / ] .
+def pi/3 [ pi 3 / ] .
+def pi/4 [ pi 4 / ] .
+def 2pi [ pi 2 * ] .
+def sqrt [ 0,5 pow ] .
+def square [ 2 pow ] .
+def cub [ 3 pow ] .
+def cos [  sin   square 1 - neg sqrt ] .
+def tan [ dup sin swap cos /   ] .
+def cotan [ tan 1 swap / ] .

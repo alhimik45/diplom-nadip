@@ -1,0 +1,71 @@
+def copystr ( str --- str copystr )
+[
+	def loop ( str1 str2 n -- str1 str2 )  
+	[ 
+		 dup 1 < 
+		[ drop ]
+		[
+			dup posh1 swap posh2 getchar pup2 swap
+			pup1 dup -- posh1 setchar pup1 loop tail
+		] if
+
+	 ] .
+
+len  "\s" swap loop
+
+] .
+
+def strconcat ( str1 str2 --- str1 str2 str1+str2   )
+[
+	var i
+	def loop ( str2 str to  n --- str2 str+ch to n++ )  
+	[
+		posh1 posh2 clone1 i ! +  clone2   >= [ pup1 pup2 drop drop ]
+			[ 
+				swap clone1 getchar posh2 swap pup2 clone1 i ! + 
+				setchar pup2 pup1 ++ loop tail	
+
+			]
+			if
+	] .	
+	swap copystr len   i swap @ posh1 swap len posh2 pup1 pup2 i ! + ++ 1 loop
+
+	devar i
+(                       мои мозги :(                                      )  
+] .  
+def substr  ( str from to  --- str substr )
+[
+	var i
+	def loop ( res str  to n -- res str to n )
+	[
+		duptwo  < [ ]
+			[
+				dup posh1 posh1 posh2 pup1 getchar
+				swap posh2 clone1 i ! - setchar pup2 pup2 pup1 ++ loop tail
+			] if
+	] .
+
+	posh1 posh2 posh1 "\s" pup1 pup1 pup2 dup i swap -- @ loop drop drop swap  
+	devar i
+(  черная магия )
+] .
+
+def strcmp ( str1 str2 --- str1 str2 bool )
+[
+	def loop ( str1 str2 n --- str1 str2 n )
+	[
+		posh1 posh2 len clone1 < [ pup1 pup2 drop drop 1 ]
+		[
+
+		clone1 getchar pup2 swap posh2 
+		 clone1 getchar pup2  =  [ pup1 ++ loop tail ]
+					[ pup1 drop 0 ] if
+		] if
+	] .
+
+	posh1 len posh2 pup1 len pup2 = [ 1 loop  ]
+	[ 0 ]  if
+] .
+
+
+
