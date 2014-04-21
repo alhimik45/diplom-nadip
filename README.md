@@ -3,20 +3,27 @@
 
 **Тема «Интерпретатор обратной польской нотации»**
 
+Было сделано для  [НУДО "НАДиП"][1]
+
 Текст работы находится в файле ```diplom.odt```
-[Посмотреть онлайн в формате pdf][1]
+
+[Посмотреть онлайн в формате pdf][2]
 
 Код компилятора в байт-код находится в папке ```code/compiler```
+
 Код виртуальной машины находится в папке ```code/VM```
+
 Код средства отладки (REPL) находится в папке ```code/repl```
 
 Всё это было сделано в Borland C++ Builder 6
-Скачать архив уже скомпилированных программ [можно тут][2]
+
+Скачать архив уже скомпилированных программ [можно тут][3]
+
 Архив содержит файлы:
 
  - rpnc.exe - компилятор в байт-код
  - rpnvm.exe -  виртуальная машина, исполняет скомпилированный файл
- - rpnrepl.exe - [REPL][3] для языка, в wine вроде как не работает
+ - rpnrepl.exe - [REPL][4] для языка, в wine вроде как не работает
  - rtl60.bpl, vcl60.bpl - библиотеки, нужны для работы в wine
 
 В папке ```libs``` находятся библиотеки, написанные на разработанном языке:
@@ -27,6 +34,8 @@
  4. arr.txt - работа в массивами: создание диапазона, функции map, filter, свертка массива, суммирование, перемножение, объединение, сортировка.
  
 
-  [1]: https://drive.google.com/file/d/0Bz7Myw57yQvoT1N5MzFldGdFR28/edit?usp=sharing
-  [2]: https://docs.google.com/uc?id=0Bz7Myw57yQvoenhYcTM0ZWg2blE&export=download
-  [3]: http://ru.wikipedia.org/wiki/REPL
+
+  [1]: http://www.nadip.ru/
+  [2]: https://drive.google.com/file/d/0Bz7Myw57yQvoT1N5MzFldGdFR28/edit?usp=sharing
+  [3]: https://docs.google.com/uc?id=0Bz7Myw57yQvoenhYcTM0ZWg2blE&export=download
+  [4]: http://ru.wikipedia.org/wiki/REPL
